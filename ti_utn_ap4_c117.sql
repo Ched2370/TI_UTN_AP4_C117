@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 19-11-2023 a las 22:02:00
+-- Tiempo de generación: 19-11-2023 a las 22:06:41
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -95,6 +95,7 @@ CREATE TABLE `especialidad_tecnico` (
 CREATE TABLE `incidente` (
   `id_incidente` int(11) NOT NULL,
   `descripcion` varchar(25) NOT NULL,
+  `fecha_inicio` date NOT NULL,
   `fecha_finalizado` date NOT NULL,
   `resuelto` tinyint(1) NOT NULL,
   `id_tecnico` int(11) NOT NULL,

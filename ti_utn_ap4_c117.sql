@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 19-11-2023 a las 21:12:32
+-- Tiempo de generación: 19-11-2023 a las 22:02:00
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -34,6 +34,22 @@ CREATE TABLE `cliente` (
   `razon_social` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `cliente`
+--
+
+INSERT INTO `cliente` (`cuit`, `razon_social`) VALUES
+(13710489, 'Innotype'),
+(22007217, 'Bubbletube'),
+(22275696, 'Edgewire'),
+(31009567, 'Pixoboo'),
+(42979481, 'Gabcube'),
+(62324804, 'Dablist'),
+(69393370, 'Tagchat'),
+(69428202, 'Feedmix'),
+(82869561, 'Bluezoom'),
+(99341234, 'Livefish');
+
 -- --------------------------------------------------------
 
 --
@@ -42,7 +58,7 @@ CREATE TABLE `cliente` (
 
 CREATE TABLE `contrato` (
   `id_contrato` int(11) NOT NULL,
-  `descripcion` int(11) NOT NULL,
+  `descripcion` varchar(25) NOT NULL,
   `id_cliente` int(11) NOT NULL,
   `id_servicio` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -55,7 +71,7 @@ CREATE TABLE `contrato` (
 
 CREATE TABLE `especialidad` (
   `id_especialidad` int(11) NOT NULL,
-  `nombre_especialidad` int(25) NOT NULL
+  `nombre_especialidad` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -132,6 +148,112 @@ CREATE TABLE `tecnico` (
   `apellido` varchar(25) NOT NULL,
   `nombre` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `tecnico`
+--
+
+INSERT INTO `tecnico` (`id_tecnico`, `apellido`, `nombre`) VALUES
+(1, 'Barboza', 'Arturo'),
+(2, 'Romero', 'Mario'),
+(3, 'Valenzuela', 'Juaquin'),
+(4, 'Gomez', 'Jorge'),
+(5, 'Ramirez', 'Carlos'),
+(6, 'Garro', 'Matias'),
+(7, 'Barboza', 'Juan'),
+(8, 'Fernandez', 'Gabriel'),
+(9, 'Uribe', 'Gabriel'),
+(10, 'Gonzalez', 'Arturo'),
+(11, 'Lopez', 'Mario'),
+(12, 'Ramirez', 'Mario'),
+(13, 'Gomez', 'Arturo'),
+(14, 'Fernandez', 'Juan'),
+(15, 'Romero', 'Arturo'),
+(16, 'Ramirez', 'Juaquin'),
+(17, 'Uribe', 'Arturo'),
+(18, 'Gomez', 'Jorge'),
+(19, 'Ramirez', 'Miguel'),
+(20, 'Barboza', 'Miguel'),
+(21, 'Lescano', 'Juan'),
+(22, 'Barboza', 'Gabriel'),
+(23, 'Valenzuela', 'Arturo'),
+(24, 'Barboza', 'Matias'),
+(25, 'Gomez', 'Matias'),
+(26, 'Barboza', 'Juaquin'),
+(27, 'Ramirez', 'Matias'),
+(28, 'Gonzalez', 'Jorge'),
+(29, 'Garro', 'Juan'),
+(30, 'Fernandez', 'Matias'),
+(31, 'Romero', 'Jorge'),
+(32, 'Lescano', 'Arturo'),
+(33, 'Fernandez', 'Juan'),
+(34, 'Valenzuela', 'Gabriel'),
+(35, 'Ramirez', 'Matias'),
+(36, 'Romero', 'Mario'),
+(37, 'Barboza', 'Carlos'),
+(38, 'Barboza', 'Gabriel'),
+(39, 'Barboza', 'Matias'),
+(40, 'Ramirez', 'Matias'),
+(41, 'Valenzuela', 'Matias'),
+(42, 'Garro', 'Arturo'),
+(43, 'Romero', 'Jorge'),
+(44, 'Uribe', 'Mario'),
+(45, 'Garro', 'Miguel'),
+(46, 'Uribe', 'Juan'),
+(47, 'Gomez', 'Carlos'),
+(48, 'Uribe', 'Mario'),
+(49, 'Lopez', 'Jorge'),
+(50, 'Uribe', 'Gabriel'),
+(51, 'Valenzuela', 'Gabriel'),
+(52, 'Garro', 'Matias'),
+(53, 'Romero', 'Juan'),
+(54, 'Lopez', 'Miguel'),
+(55, 'Gonzalez', 'Jorge'),
+(56, 'Fernandez', 'Gabriel'),
+(57, 'Romero', 'Juaquin'),
+(58, 'Valenzuela', 'Juaquin'),
+(59, 'Lescano', 'Arturo'),
+(60, 'Romero', 'Mario'),
+(61, 'Valenzuela', 'Juan'),
+(62, 'Barboza', 'Carlos'),
+(63, 'Gonzalez', 'Miguel'),
+(64, 'Ramirez', 'Jorge'),
+(65, 'Lopez', 'Arturo'),
+(66, 'Valenzuela', 'Juaquin'),
+(67, 'Barboza', 'Jorge'),
+(68, 'Barboza', 'Carlos'),
+(69, 'Romero', 'Mario'),
+(70, 'Uribe', 'Gabriel'),
+(71, 'Lescano', 'Arturo'),
+(72, 'Valenzuela', 'Juaquin'),
+(73, 'Uribe', 'Miguel'),
+(74, 'Romero', 'Arturo'),
+(75, 'Garro', 'Gabriel'),
+(76, 'Romero', 'Carlos'),
+(77, 'Gomez', 'Matias'),
+(78, 'Valenzuela', 'Arturo'),
+(79, 'Lescano', 'Jorge'),
+(80, 'Gomez', 'Miguel'),
+(81, 'Gomez', 'Matias'),
+(82, 'Valenzuela', 'Arturo'),
+(83, 'Lopez', 'Arturo'),
+(84, 'Ramirez', 'Matias'),
+(85, 'Ramirez', 'Gabriel'),
+(86, 'Valenzuela', 'Miguel'),
+(87, 'Barboza', 'Jorge'),
+(88, 'Ramirez', 'Matias'),
+(89, 'Lescano', 'Jorge'),
+(90, 'Barboza', 'Gabriel'),
+(91, 'Ramirez', 'Miguel'),
+(92, 'Gomez', 'Juaquin'),
+(93, 'Lescano', 'Carlos'),
+(94, 'Garro', 'Gabriel'),
+(95, 'Lescano', 'Gabriel'),
+(96, 'Lescano', 'Matias'),
+(97, 'Ramirez', 'Miguel'),
+(98, 'Gomez', 'Arturo'),
+(99, 'Lescano', 'Juan'),
+(100, 'Lopez', 'Juaquin');
 
 --
 -- Índices para tablas volcadas
@@ -250,7 +372,7 @@ ALTER TABLE `servicio`
 -- AUTO_INCREMENT de la tabla `tecnico`
 --
 ALTER TABLE `tecnico`
-  MODIFY `id_tecnico` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_tecnico` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
 
 --
 -- Restricciones para tablas volcadas

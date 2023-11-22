@@ -1,24 +1,47 @@
 package org.example.entidades;
+
+import jakarta.persistence.*;
+import java.util.List;
+
+@Entity
+@Table(name = "problema")
 public class Problema {
- private int id_Problema;
- private String descripcion;
- private Cliente cliente;
- public Problema(){
 
- }
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_problema")
+    private int id_problema;
 
-    public Problema(int id_Problema, String descripcion, Cliente cliente) {
-        this.id_Problema = id_Problema;
+    @Column(name = "descripcion")
+    private String descripcion;
+
+    @ManyToOne
+    @JoinColumn(name = "id_cliente", referencedColumnName = "cuit")
+    private Cliente cliente;
+
+    @OneToMany(mappedBy = "problema", cascade = CascadeType.ALL)
+    private List<Incidente> incidentes;
+
+    public Problema() {
+    }
+
+    public Problema(String descripcion, Cliente cliente) {
         this.descripcion = descripcion;
         this.cliente = cliente;
     }
 
-    public int getId_Problema() {
-        return id_Problema;
+    public Problema(int id_problema, String descripcion, Cliente cliente) {
+        this.id_problema = id_problema;
+        this.descripcion = descripcion;
+        this.cliente = cliente;
     }
 
-    public void setId_Problema(int id_Problema) {
-        this.id_Problema = id_Problema;
+    public int getId_problema() {
+        return id_problema;
+    }
+
+    public void setId_problema(int id_problema) {
+        this.id_problema = id_problema;
     }
 
     public String getDescripcion() {
@@ -37,14 +60,4 @@ public class Problema {
         this.cliente = cliente;
     }
 
-    @Override
-    public String toString() {
-        return "Problema{" +
-                "id_Problema=" + id_Problema +
-                ", descripcion='" + descripcion + '\'' +
-                ", cliente=" + cliente +
-                '}';
-    }
 }
-
-

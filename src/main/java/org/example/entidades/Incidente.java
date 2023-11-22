@@ -1,18 +1,54 @@
 package org.example.entidades;
 
+import jakarta.persistence.*;
 import java.util.Date;
 
+@Entity
+@Table(name = "incidente")
 public class Incidente {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_incidente")
     private int id_incidente;
+
+    @Column(name = "descripcion")
     private String descripcion;
+    @Column(name = "fecha_inicio")
     private Date fecha_inicio;
+    @Column(name = "fecha_finalizado")
     private Date fecha_finalizado;
+    @Column(name = "resuelto")
     private boolean resuelto;
+
+    @ManyToOne
+    @JoinColumn(name = "id_tecnico")
     private Tecnico tecnico;
+
+    @ManyToOne
+    @JoinColumn(name = "id_especialidad")
     private Especialidad especialidad;
+
+    @ManyToOne
+    @JoinColumn(name = "id_operador")
     private Operador operador;
+
+    @ManyToOne
+    @JoinColumn(name = "id_problema")
     private Problema problema;
+
     public Incidente() {
+    }
+
+    public Incidente(String descripcion, Date fecha_inicio, Date fecha_finalizado, boolean resuelto, Tecnico tecnico, Especialidad especialidad, Operador operador, Problema problema) {
+        this.descripcion = descripcion;
+        this.fecha_inicio = fecha_inicio;
+        this.fecha_finalizado = fecha_finalizado;
+        this.resuelto = resuelto;
+        this.tecnico = tecnico;
+        this.especialidad = especialidad;
+        this.operador = operador;
+        this.problema = problema;
     }
 
     public Incidente(int id_incidente, String descripcion, Date fecha_inicio, Date fecha_finalizado, boolean resuelto, Tecnico tecnico, Especialidad especialidad, Operador operador, Problema problema) {
@@ -99,19 +135,4 @@ public class Incidente {
         this.problema = problema;
     }
 
-    @Override
-    public String toString() {
-        return "Incidente{" +
-                "id_incidente=" + id_incidente +
-                ", descripcion='" + descripcion + '\'' +
-                ", fecha_inicio=" + fecha_inicio +
-                ", fecha_finalizado=" + fecha_finalizado +
-                ", resuelto=" + resuelto +
-                ", tecnico=" + tecnico +
-                ", especialidad=" + especialidad +
-                ", operador=" + operador +
-                ", problema=" + problema +
-                '}';
-    }
 }
-

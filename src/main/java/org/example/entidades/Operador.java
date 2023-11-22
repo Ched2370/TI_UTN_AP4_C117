@@ -1,10 +1,28 @@
 package org.example.entidades;
 
-public class Operador {
-    private int id_operador;
-    private String nombre;
-    public Operador(){
+import jakarta.persistence.*;
+import java.util.List;
 
+@Entity
+@Table(name = "operador")
+public class Operador {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_operador")
+    private int id_operador;
+
+    @Column(name = "nombre")
+    private String nombre;
+
+    @OneToMany(mappedBy = "operador", cascade = CascadeType.ALL)
+    private List<Incidente> incidentes;
+
+    public Operador() {
+    }
+
+    public Operador(String nombre) {
+        this.nombre = nombre;
     }
 
     public Operador(int id_operador, String nombre) {
@@ -28,11 +46,4 @@ public class Operador {
         this.nombre = nombre;
     }
 
-    @Override
-    public String toString() {
-        return "Operador{" +
-                "id_operador=" + id_operador +
-                ", nombre='" + nombre + '\'' +
-                '}';
-    }
 }

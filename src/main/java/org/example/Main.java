@@ -1,32 +1,43 @@
 package org.example;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import org.example.accesodatos.EspecialidadDAO;
+import org.example.accesodatos.IncidenteDAO;
+import org.example.accesodatos.TecnicoDAO;
 import org.example.entidades.Especialidad;
+import org.example.entidades.Incidente;
 import org.example.entidades.Tecnico;
 
 public class Main {
 
     public static void main(String[] args) {
 
-        // Quién(es) fue el(los) técnico(s) con más incidentes resueltos en los últimos N días
-        int dias = 4;
-        List<Tecnico> tecnicos = Logica.tecnicosConMasIncidentesResueltos_enUltimosXdias(dias);
+        // Recursos necesarios antes de hacer las pruebas
+        TecnicoDAO datosTec = new TecnicoDAO();
+        IncidenteDAO datosIncidentes = new IncidenteDAO();
+        EspecialidadDAO datosEspecialidad = new EspecialidadDAO();
 
-        System.out.println("");
-        System.out.println("*******************************************");
-        if (tecnicos.size() != 0) {
+        List<Tecnico> tecnicos = datosTec.getListaTecnicos();
+        List<Incidente> incidentes = datosIncidentes.getListaIncidentes();
+        List<Especialidad> especialidades = datosEspecialidad.getListaEspecialidades();
 
-            System.out.println("Técnicos que han resuelto la mayor cantidad de "
-                    + "incidentes en los últimos " + dias + " días:");
+        // - #1: Quién(es) fue el(los) técnico(s) con más incidentes resueltos en los últimos N días
+        try {
+            int dias = 4;
+            List<Tecnico> listaTecnicos = Logica.tecnicosConMasIncidentesResueltos_enUltimosXdias(dias, incidentes);
 
-            for (Tecnico tecnico : tecnicos) {
-                System.out.println("#" + tecnico.getId_tecnico() + " "
-                        + tecnico.getNombre() + " " + tecnico.getApellido());
+            System.out.println("");
+            System.out.println("*******************************************");
+
+            System.out.println("Se encontraron " + listaTecnicos.size() + " resultados.");
+            for (Tecnico tecnico : listaTecnicos) {
+                System.out.println(" - Técnico ID #: " + tecnico.getId_tecnico());
             }
-        } else {
-            System.out.println("No se han encontrado técnicos.");
+        } catch (NoSuchElementException e) {
+            System.out.println("No hay resultados.");
         }
+
     }
 
 }

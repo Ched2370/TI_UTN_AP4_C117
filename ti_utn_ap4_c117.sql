@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 19-11-2023 a las 22:06:41
+-- Tiempo de generación: 25-11-2023 a las 20:58:15
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -39,6 +39,7 @@ CREATE TABLE `cliente` (
 --
 
 INSERT INTO `cliente` (`cuit`, `razon_social`) VALUES
+(987654, 'Pepe SA 2'),
 (13710489, 'Innotype'),
 (22007217, 'Bubbletube'),
 (22275696, 'Edgewire'),
@@ -74,6 +75,17 @@ CREATE TABLE `especialidad` (
   `nombre_especialidad` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `especialidad`
+--
+
+INSERT INTO `especialidad` (`id_especialidad`, `nombre_especialidad`) VALUES
+(2, 'Soporte para Windows'),
+(3, 'Soporte para macOS'),
+(4, 'Soporte para Linux'),
+(5, 'Soporte para Microsoft Of'),
+(6, 'Soporte para software de ');
+
 -- --------------------------------------------------------
 
 --
@@ -95,14 +107,40 @@ CREATE TABLE `especialidad_tecnico` (
 CREATE TABLE `incidente` (
   `id_incidente` int(11) NOT NULL,
   `descripcion` varchar(25) NOT NULL,
-  `fecha_inicio` date NOT NULL,
-  `fecha_finalizado` date NOT NULL,
+  `fecha_inicio` datetime(6) DEFAULT NULL,
+  `fecha_finalizado` datetime(6) DEFAULT NULL,
   `resuelto` tinyint(1) NOT NULL,
   `id_tecnico` int(11) NOT NULL,
   `id_especialidad` int(11) NOT NULL,
   `id_operador` int(11) NOT NULL,
   `id_problema` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `incidente`
+--
+
+INSERT INTO `incidente` (`id_incidente`, `descripcion`, `fecha_inicio`, `fecha_finalizado`, `resuelto`, `id_tecnico`, `id_especialidad`, `id_operador`, `id_problema`) VALUES
+(17, 'Problema de red', '2023-11-01 00:00:00.000000', '2023-11-10 00:00:00.000000', 1, 1, 2, 2, 1),
+(18, 'Error en la aplicación', '2023-11-02 00:00:00.000000', '2023-11-15 00:00:00.000000', 1, 2, 3, 3, 1),
+(19, 'Fallo del sistema operati', '2023-11-03 00:00:00.000000', '2023-11-18 00:00:00.000000', 0, 3, 4, 4, 1),
+(20, 'Problema de hardware', '2023-11-04 00:00:00.000000', '2023-11-20 00:00:00.000000', 1, 1, 5, 5, 1),
+(21, 'Error de software', '2023-11-05 00:00:00.000000', '2023-11-22 00:00:00.000000', 0, 5, 6, 6, 1),
+(22, 'Fallo en la red', '2023-11-06 00:00:00.000000', '2023-11-23 00:00:00.000000', 1, 1, 2, 7, 1),
+(23, 'Problema de aplicación mó', '2023-11-07 00:00:00.000000', '2023-11-10 00:00:00.000000', 1, 7, 3, 8, 1),
+(24, 'Error del sistema operati', '2023-11-08 00:00:00.000000', '2023-11-15 00:00:00.000000', 1, 8, 4, 9, 1),
+(25, 'Fallo de hardware', '2023-11-09 00:00:00.000000', '2023-11-18 00:00:00.000000', 1, 9, 5, 10, 1),
+(26, 'Error de software', '2023-11-10 00:00:00.000000', '2023-11-20 00:00:00.000000', 1, 1, 6, 11, 1),
+(27, 'Problema de red', '2023-11-11 00:00:00.000000', '2023-11-22 00:00:00.000000', 1, 11, 2, 12, 1),
+(28, 'Fallo en la aplicación', '2023-11-12 00:00:00.000000', '2023-11-23 00:00:00.000000', 1, 12, 3, 13, 1),
+(29, 'Error del sistema operati', '2023-11-13 00:00:00.000000', '2023-11-10 00:00:00.000000', 0, 13, 4, 14, 1),
+(30, 'Problema de hardware', '2023-11-14 00:00:00.000000', '2023-11-15 00:00:00.000000', 1, 2, 5, 15, 1),
+(31, 'Error de software', '2023-11-15 00:00:00.000000', '2023-11-18 00:00:00.000000', 1, 2, 6, 16, 1),
+(32, 'Fallo en la red', '2023-11-16 00:00:00.000000', '2023-11-20 00:00:00.000000', 1, 16, 2, 2, 1),
+(33, 'Problema de aplicación mó', '2023-11-17 00:00:00.000000', '2023-11-22 00:00:00.000000', 1, 17, 3, 3, 1),
+(34, 'Error del sistema operati', '2023-11-18 00:00:00.000000', '2023-11-23 00:00:00.000000', 0, 18, 4, 4, 1),
+(35, 'Fallo de hardware', '2023-11-19 00:00:00.000000', '2023-11-10 00:00:00.000000', 1, 19, 5, 5, 1),
+(36, 'Error de software', '2023-11-20 00:00:00.000000', '2023-11-15 00:00:00.000000', 1, 20, 6, 6, 1);
 
 -- --------------------------------------------------------
 
@@ -115,6 +153,27 @@ CREATE TABLE `operador` (
   `nombre` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `operador`
+--
+
+INSERT INTO `operador` (`id_operador`, `nombre`) VALUES
+(2, 'Juan Pérez'),
+(3, 'María González'),
+(4, 'Carlos Rodríguez'),
+(5, 'Laura Martínez'),
+(6, 'Pedro Sánchez'),
+(7, 'Ana Ramírez'),
+(8, 'Javier López'),
+(9, 'Carmen Fernández'),
+(10, 'Raúl Gómez'),
+(11, 'Leticia Díaz'),
+(12, 'Miguel Torres'),
+(13, 'Sofía Herrera'),
+(14, 'Alejandro Ruiz'),
+(15, 'Lucía Vargas'),
+(16, 'Gabriel Castro');
+
 -- --------------------------------------------------------
 
 --
@@ -126,6 +185,13 @@ CREATE TABLE `problema` (
   `descripcion` varchar(25) NOT NULL,
   `id_cliente` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `problema`
+--
+
+INSERT INTO `problema` (`id_problema`, `descripcion`, `id_cliente`) VALUES
+(1, 'Problema 2', 987654);
 
 -- --------------------------------------------------------
 
@@ -254,7 +320,8 @@ INSERT INTO `tecnico` (`id_tecnico`, `apellido`, `nombre`) VALUES
 (97, 'Ramirez', 'Miguel'),
 (98, 'Gomez', 'Arturo'),
 (99, 'Lescano', 'Juan'),
-(100, 'Lopez', 'Juaquin');
+(100, 'Lopez', 'Juaquin'),
+(101, 'PepePepe', 'Prueba 2');
 
 --
 -- Índices para tablas volcadas
@@ -337,7 +404,7 @@ ALTER TABLE `contrato`
 -- AUTO_INCREMENT de la tabla `especialidad`
 --
 ALTER TABLE `especialidad`
-  MODIFY `id_especialidad` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_especialidad` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `especialidad_tecnico`
@@ -349,19 +416,19 @@ ALTER TABLE `especialidad_tecnico`
 -- AUTO_INCREMENT de la tabla `incidente`
 --
 ALTER TABLE `incidente`
-  MODIFY `id_incidente` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_incidente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT de la tabla `operador`
 --
 ALTER TABLE `operador`
-  MODIFY `id_operador` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_operador` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT de la tabla `problema`
 --
 ALTER TABLE `problema`
-  MODIFY `id_problema` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_problema` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `servicio`
@@ -373,7 +440,7 @@ ALTER TABLE `servicio`
 -- AUTO_INCREMENT de la tabla `tecnico`
 --
 ALTER TABLE `tecnico`
-  MODIFY `id_tecnico` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
+  MODIFY `id_tecnico` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=103;
 
 --
 -- Restricciones para tablas volcadas

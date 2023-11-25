@@ -1,7 +1,9 @@
 package org.example.entidades;
 
 import jakarta.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "incidente")
@@ -49,6 +51,7 @@ public class Incidente {
         this.especialidad = especialidad;
         this.operador = operador;
         this.problema = problema;
+
     }
 
     public Incidente(int id_incidente, String descripcion, Date fecha_inicio, Date fecha_finalizado, boolean resuelto, Tecnico tecnico, Especialidad especialidad, Operador operador, Problema problema) {

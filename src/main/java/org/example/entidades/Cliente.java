@@ -16,7 +16,7 @@ public class Cliente {
 
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
     private List<Contrato> contratos;
-    
+
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
     private List<Problema> problemas;
 
@@ -50,6 +50,11 @@ public class Cliente {
 
     public void setContratos(List<Contrato> contratos) {
         this.contratos = contratos;
+    }
+
+    @Override
+    public String toString() {
+        return "Cliente{" + "cuit=" + cuit + ", razonSocial=" + razonSocial + '}';
     }
 
 }

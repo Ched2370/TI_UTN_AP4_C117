@@ -74,4 +74,9 @@ public class Tecnico {
         this.especialidades = especialidades;
     }
 
+    @Override
+    public String toString() {
+        return "Tecnico{" + "id_tecnico=" + id_tecnico + ", apellido=" + apellido + ", nombre=" + nombre + '}';
+    }
+
 }

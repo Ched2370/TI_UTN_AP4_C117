@@ -2,6 +2,9 @@ package org.example.entidades;
 
 import jakarta.persistence.*;
 import java.util.Date;
+import org.example.states.EstadoIncidente;
+import org.example.states.Pendiente;
+import org.example.states.Resuelto;
 
 @Entity
 @Table(name = "incidente")
@@ -39,7 +42,12 @@ public class Incidente {
     @JoinColumn(name = "id_problema")
     private Problema problema;
 
+    private EstadoIncidente estado;
+
     public Incidente() {
+        // Se inicia el estado como Resuelto o Pendiente segun el valor de "resuelto"
+        // true = Resuelto, false = Pendiente
+        this.estado = resuelto ? new Resuelto() : new Pendiente();
     }
 
     public Incidente(String descripcion, Date fecha_inicio, Date fecha_finalizado, boolean resuelto, int diferencia_dias, Tecnico tecnico, Especialidad especialidad, Operador operador, Problema problema) {
@@ -52,6 +60,9 @@ public class Incidente {
         this.especialidad = especialidad;
         this.operador = operador;
         this.problema = problema;
+        // Se inicia el estado como Resuelto o Pendiente segun el valor de "resuelto"
+        // true = Resuelto, false = Pendiente
+        this.estado = resuelto ? new Resuelto() : new Pendiente();
 
     }
 
@@ -66,6 +77,9 @@ public class Incidente {
         this.especialidad = especialidad;
         this.operador = operador;
         this.problema = problema;
+        // Se inicia el estado como Resuelto o Pendiente segun el valor de "resuelto"
+        // true = Resuelto, false = Pendiente
+        this.estado = resuelto ? new Resuelto() : new Pendiente();
     }
 
     public int getId_incidente() {
@@ -146,6 +160,25 @@ public class Incidente {
 
     public void setDiferencia_dias(int diferencia_dias) {
         this.diferencia_dias = diferencia_dias;
+    }
+
+    public EstadoIncidente getEstado() {
+        return estado;
+    }
+
+    public void setEstado(EstadoIncidente estado) {
+        this.estado = estado;
+    }
+
+    // Metodos que manejan el Estado
+    public void resolverIncidente() {
+        estado.resolverIncidente(this);
+        this.resuelto = true;
+    }
+
+    public void iniciarIncidente() {
+        estado.iniciarIncidente(this);
+        this.resuelto = false;
     }
 
 }

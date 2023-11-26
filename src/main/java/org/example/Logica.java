@@ -67,24 +67,15 @@ public class Logica {
 
     public static List<Tecnico> tecnicoMasRapido(List<Incidente> incidentes) {
 
-        List<Tecnico> tecnicos;
-        int minCantidad = incidentes.get(0).getDiferencia_dias();
+        int minCantidad = incidentes.stream()
+                .mapToInt(Incidente::getDiferencia_dias)
+                .min()
+                .orElse(0);
 
-        for (Incidente incidente : incidentes) {
-
-            if (minCantidad > incidente.getDiferencia_dias()) {
-                minCantidad = incidente.getDiferencia_dias();
-            }
-        }
-
-        final int min = minCantidad;
-
-        tecnicos = incidentes.stream()
-                .filter(incidente -> incidente.getDiferencia_dias() == min)
-                .map(incidente -> incidente.getTecnico())
+        return incidentes.stream()
+                .filter(incidente -> incidente.getDiferencia_dias() == minCantidad)
+                .map(Incidente::getTecnico)
                 .collect(Collectors.toList());
-
-        return tecnicos;
 
     }
 

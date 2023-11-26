@@ -45,9 +45,10 @@ public class ClienteDAO {
 
         em.getTransaction().begin();
         Cliente cliente = em.find(Cliente.class, cuit);
+        cliente.setActivo(false);
 
         if (cliente != null) {
-            em.remove(cliente);
+            em.merge(cliente);
         }
 
         em.getTransaction().commit();

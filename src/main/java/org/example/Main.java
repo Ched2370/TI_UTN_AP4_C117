@@ -17,6 +17,7 @@ public class Main {
         TecnicoDAO datosTec = new TecnicoDAO();
         IncidenteDAO datosIncidentes = new IncidenteDAO();
         EspecialidadDAO datosEspecialidad = new EspecialidadDAO();
+        Especialidad especialidad = datosEspecialidad.buscarEspecialidad(3);
 
         List<Tecnico> tecnicos = datosTec.getListaTecnicos();
         List<Incidente> incidentes = datosIncidentes.getListaIncidentes();
@@ -35,7 +36,42 @@ public class Main {
                 System.out.println(" - Técnico ID #: " + tecnico.getId_tecnico());
             }
         } catch (NoSuchElementException e) {
+
+            System.out.println("");
+            System.out.println("*******************************************");
+
             System.out.println("No hay resultados.");
+        }
+
+        // - #2: Quién(es) fue el(los) técnico(s) con más incidentes resueltos en los últimos N días según una especialidad
+        try {
+            int dias = 4;
+            List<Tecnico> listaTecnicos = Logica.tecnicosConMasIncidentesResueltos_enUltimosXdias_Especialidades(dias, incidentes, especialidad);
+
+            System.out.println("");
+            System.out.println("*******************************************");
+
+            System.out.println("Se encontraron " + listaTecnicos.size() + " resultados.");
+            for (Tecnico tecnico : listaTecnicos) {
+                System.out.println(" - Técnico ID #: " + tecnico.getId_tecnico());
+            }
+        } catch (NoSuchElementException e) {
+
+            System.out.println("");
+            System.out.println("*******************************************");
+
+            System.out.println("No hay resultados.");
+        }
+
+        // Quién fue el técnico que más rápido resolvió los incidentes
+        System.out.println("");
+        System.out.println("*******************************************");
+
+        List<Tecnico> listaTecnicos = Logica.tecnicoMasRapido(incidentes);
+
+        for (Tecnico tecnico : listaTecnicos) {
+            System.out.println(" - Técnico ID #: " + tecnico.getId_tecnico());
+
         }
 
     }

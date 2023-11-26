@@ -20,6 +20,8 @@ public class Incidente {
     private Date fecha_finalizado;
     @Column(name = "resuelto")
     private boolean resuelto;
+    @Column(name = "diferencia_dias")
+    private int diferencia_dias;
 
     @ManyToOne
     @JoinColumn(name = "id_tecnico")
@@ -40,11 +42,12 @@ public class Incidente {
     public Incidente() {
     }
 
-    public Incidente(String descripcion, Date fecha_inicio, Date fecha_finalizado, boolean resuelto, Tecnico tecnico, Especialidad especialidad, Operador operador, Problema problema) {
+    public Incidente(String descripcion, Date fecha_inicio, Date fecha_finalizado, boolean resuelto, int diferencia_dias, Tecnico tecnico, Especialidad especialidad, Operador operador, Problema problema) {
         this.descripcion = descripcion;
         this.fecha_inicio = fecha_inicio;
         this.fecha_finalizado = fecha_finalizado;
         this.resuelto = resuelto;
+        this.diferencia_dias = (int) (fecha_finalizado.getTime() - fecha_inicio.getTime());
         this.tecnico = tecnico;
         this.especialidad = especialidad;
         this.operador = operador;
@@ -52,12 +55,13 @@ public class Incidente {
 
     }
 
-    public Incidente(int id_incidente, String descripcion, Date fecha_inicio, Date fecha_finalizado, boolean resuelto, Tecnico tecnico, Especialidad especialidad, Operador operador, Problema problema) {
+    public Incidente(int id_incidente, String descripcion, Date fecha_inicio, Date fecha_finalizado, boolean resuelto, int diferencia_dias, Tecnico tecnico, Especialidad especialidad, Operador operador, Problema problema) {
         this.id_incidente = id_incidente;
         this.descripcion = descripcion;
         this.fecha_inicio = fecha_inicio;
         this.fecha_finalizado = fecha_finalizado;
         this.resuelto = resuelto;
+        this.diferencia_dias = (int) (fecha_finalizado.getTime() - fecha_inicio.getTime());
         this.tecnico = tecnico;
         this.especialidad = especialidad;
         this.operador = operador;
@@ -134,6 +138,14 @@ public class Incidente {
 
     public void setProblema(Problema problema) {
         this.problema = problema;
+    }
+
+    public int getDiferencia_dias() {
+        return diferencia_dias;
+    }
+
+    public void setDiferencia_dias(int diferencia_dias) {
+        this.diferencia_dias = diferencia_dias;
     }
 
 }

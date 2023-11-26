@@ -16,6 +16,8 @@ public class Tecnico {
     private String apellido;
     @Column(name = "nombre")
     private String nombre;
+    @Column(name = "activo")
+    private boolean activo;
 
     @ManyToMany
     @JoinTable(
@@ -31,15 +33,17 @@ public class Tecnico {
     public Tecnico() {
     }
 
-    public Tecnico(String apellido, String nombre) {
+    public Tecnico(String apellido, String nombre, boolean activo) {
         this.apellido = apellido;
         this.nombre = nombre;
+        this.activo = activo;
     }
 
-    public Tecnico(int id_tecnico, String apellido, String nombre) {
+    public Tecnico(int id_tecnico, String apellido, String nombre, boolean activo) {
         this.id_tecnico = id_tecnico;
         this.apellido = apellido;
         this.nombre = nombre;
+        this.activo = activo;
     }
 
     public int getId_tecnico() {
@@ -72,6 +76,14 @@ public class Tecnico {
 
     public void setEspecialidades(List<Especialidad> especialidades) {
         this.especialidades = especialidades;
+    }
+
+    public boolean isActivo() {
+        return activo;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
     }
 
     @Override

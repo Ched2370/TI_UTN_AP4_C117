@@ -47,9 +47,10 @@ public class TecnicoDAO {
 
         em.getTransaction().begin();
         Tecnico tecnico = em.find(Tecnico.class, id_tecnico);
+        tecnico.setActivo(false);
 
         if (tecnico != null) {
-            em.remove(tecnico);
+            em.merge(tecnico);
         }
 
         em.getTransaction().commit();

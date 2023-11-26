@@ -13,6 +13,8 @@ public class Cliente {
 
     @Column(name = "razon_social")
     private String razonSocial;
+    @Column(name = "activo")
+    private boolean activo;
 
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
     private List<Contrato> contratos;
@@ -23,9 +25,10 @@ public class Cliente {
     public Cliente() {
     }
 
-    public Cliente(int cuit, String razonSocial) {
+    public Cliente(int cuit, String razonSocial, boolean activo) {
         this.cuit = cuit;
         this.razonSocial = razonSocial;
+        this.activo = activo;
     }
 
     public int getCuit() {
@@ -50,6 +53,14 @@ public class Cliente {
 
     public void setContratos(List<Contrato> contratos) {
         this.contratos = contratos;
+    }
+
+    public boolean isActivo() {
+        return activo;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
     }
 
     @Override

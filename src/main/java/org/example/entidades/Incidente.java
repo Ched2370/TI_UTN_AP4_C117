@@ -1,6 +1,9 @@
 package org.example.entidades;
 
 import jakarta.persistence.*;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import org.example.states.EstadoIncidente;
 import org.example.states.Pendiente;
@@ -50,12 +53,12 @@ public class Incidente {
         this.estado = resuelto ? new Resuelto() : new Pendiente();
     }
 
-    public Incidente(String descripcion, Date fecha_inicio, Date fecha_finalizado, boolean resuelto, int diferencia_dias, Tecnico tecnico, Especialidad especialidad, Operador operador, Problema problema) {
+    public Incidente(String descripcion, Date fecha_inicio, Date fecha_finalizado, boolean resuelto, Tecnico tecnico, Especialidad especialidad, Operador operador, Problema problema) {
         this.descripcion = descripcion;
         this.fecha_inicio = fecha_inicio;
         this.fecha_finalizado = fecha_finalizado;
         this.resuelto = resuelto;
-        this.diferencia_dias = (int) (fecha_finalizado.getTime() - fecha_inicio.getTime());
+        this.diferencia_dias = setearDiferenciaFechas();
         this.tecnico = tecnico;
         this.especialidad = especialidad;
         this.operador = operador;
@@ -66,13 +69,13 @@ public class Incidente {
 
     }
 
-    public Incidente(int id_incidente, String descripcion, Date fecha_inicio, Date fecha_finalizado, boolean resuelto, int diferencia_dias, Tecnico tecnico, Especialidad especialidad, Operador operador, Problema problema) {
+    public Incidente(int id_incidente, String descripcion, Date fecha_inicio, Date fecha_finalizado, boolean resuelto, Tecnico tecnico, Especialidad especialidad, Operador operador, Problema problema) {
         this.id_incidente = id_incidente;
         this.descripcion = descripcion;
         this.fecha_inicio = fecha_inicio;
         this.fecha_finalizado = fecha_finalizado;
         this.resuelto = resuelto;
-        this.diferencia_dias = (int) (fecha_finalizado.getTime() - fecha_inicio.getTime());
+        this.diferencia_dias = setearDiferenciaFechas();
         this.tecnico = tecnico;
         this.especialidad = especialidad;
         this.operador = operador;
@@ -179,6 +182,15 @@ public class Incidente {
     public void iniciarIncidente() {
         estado.iniciarIncidente(this);
         this.resuelto = false;
+    }
+
+    private int setearDiferenciaFechas() {
+
+        LocalDate fechaInicio = fecha_inicio.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        LocalDate fechaFinal = fecha_finalizado.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        int diasDiferencia = (int) ChronoUnit.DAYS.between(fechaFinal, fechaInicio);
+
+        return diasDiferencia;
     }
 
 }

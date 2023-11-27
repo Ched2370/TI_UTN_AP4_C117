@@ -7,6 +7,7 @@ import org.example.accesodatos.IncidenteDAO;
 import org.example.entidades.Especialidad;
 import org.example.entidades.Incidente;
 import org.example.entidades.Tecnico;
+import org.example.logica.Logica;
 
 public class Main {
 

@@ -1,4 +1,4 @@
-package org.example;
+package org.example.logica;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
